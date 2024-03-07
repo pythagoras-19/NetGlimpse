@@ -1,4 +1,4 @@
-# NetGlimpse
+# NetGlimpse (Timeline: T-4 days to launch)!
 ## Overview
 NetGlimpse is a command-line utility designed to fetch and display the content from a specified URL directly to your
 terminal. This tool is tailored for developers, system administrators, or any tech enthusiasts who require a 
