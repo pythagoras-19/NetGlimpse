@@ -12,8 +12,8 @@ of the entire text content.
 format, similar to the output of the Linux command od -t x1. It prints 16 bytes per line, each byte separated by a space, 
 and precedes each line with the file offset in hexadecimal. This output is also paced at one line per second.
 3. **Interactive Speed Control**: Users can interact with the ongoing display using the keyboard:
-Pressing the "+" key increases the speed of the display.
-Pressing the "-" key decreases the speed of the display.
+Pressing the "q" key increases the speed of the display.
+Pressing the "s" key decreases the speed of the display.
 Pressing the spacebar pauses the display; pressing it again resumes the display.
 4. **Immediate Response**: The program is designed to respond immediately to key presses, ensuring a smooth and 
 responsive user experience even while the data is being printed.

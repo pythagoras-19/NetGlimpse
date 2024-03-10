@@ -1,9 +1,11 @@
 const axios = require('axios');
 const keypress = require('keypress');
 
-keypress(process.stdin); // make 'process.stdin' begin emitting keypress events
+keypress(process.stdin);
+
 let paused = false;
 let delay = 1000; // 1 sec.
+
 (async () => {
     try {
         const url = process.argv[2];
@@ -19,7 +21,6 @@ let delay = 1000; // 1 sec.
     }
 })();
 
-// listen for keypress events
 process.stdin.on('keypress', (ch, key) => {
     if (key) {
         if (key.name === 'space') {
@@ -78,7 +79,7 @@ async function fetchAndProcessUrl(url) {
         const contentType = response.headers['content-type'];
 
         if (/text/.test(contentType)) {
-            const text = data.toString('utf8');
+            const text = data.toString();
             printTextResource(text);
         } else {
             // TODO: FINISH ME
@@ -86,6 +87,5 @@ async function fetchAndProcessUrl(url) {
         }
     } catch(error) {
         console.error(`\x1b[31mError: Failed! ${error.message}\x1b[0m`);
-
     }
 }
