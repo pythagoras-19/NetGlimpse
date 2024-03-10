@@ -21,20 +21,26 @@ let delay = 1000; // 1 sec.
 
 // listen for keypress events
 process.stdin.on('keypress', (ch, key) => {
-    console.log("got keypress", key);
+    console.log(`got keypress: char='${ch}' key=${JSON.stringify(key)}`);
     if (key) {
         if (key.name === 'space') {
             paused = !paused;
-        } else if (key.name === '+' && delay > 100) {
+            console.log(paused ? "\x1b[35mPaused!\x1b[0m" : "\x1b[35mUnpaused!\x1b[0m");
+            if(!paused) {
+                printNextLine();
+            }
+        } else if (key && key.name === 'q' && delay > 100) {
+            // print quickening pace in green!
+            console.log("\x1b[32mQuickening pace!\x1b[0m");
             delay /= 2;
-        } else if (key.name === '-' && delay < 8000) {
+        } else if (key && key.name === 's' && delay < 8000) {
+            console.log("\x1b[33mSlowing down!\x1b[0m");
             delay *= 2;
         }
     }
 
     if (key && key.ctrl && key.name === 'c') {
         console.log('CTRL+C pressed. Exiting...');
-        //process.stdin.pause();
         process.exit();
     }
 });
@@ -53,20 +59,14 @@ function printTextResource(text) {
 
 function printNextLine() {
     if (paused || currentLine >= textLines.length) {
-        console.log("returning");
-        console.log("why? : " + paused);
-        console.log("textLines.length:  " + textLines.length);
         return;
     }
-    //console.log(`Preparing to print line ${currentLine + 1}`);
     setTimeout(() => {
         try {
             console.log(`${currentLine + 1}: ${textLines[currentLine]}`);
-            //console.log("setTimeout worked!");
             currentLine++;
-            printNextLine();  // Schedule the next line
+            printNextLine();
         } catch (error) {
-            console.log("I DIDNT WORK :(");
             console.error("An error occurred:", error);
         }
     }, delay);
@@ -81,17 +81,12 @@ async function fetchAndProcessUrl(url) {
     console.log("Fetch and processing URL: " + url);
     try {
         const response = await axios.get(url, { responseType: 'arraybuffer' });
-        //console.log("response: " + response);
         const data = response.data;
-        // console.log("response data: " + response.data);
         const contentType = response.headers['content-type'];
 
         if (/text/.test(contentType)) {
             const text = data.toString('utf8');
-            console.log("----------------TEXT--------------------\n");
-            // console.log(text);
             printTextResource(text);
-            console.log("---------------END TEXT------------------\n");
         } else {
             // TODO: FINISH ME
             printNonTextResource(data);
