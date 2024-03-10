@@ -21,26 +21,20 @@ let delay = 1000; // 1 sec.
 
 // listen for keypress events
 process.stdin.on('keypress', (ch, key) => {
-    console.log(`got keypress: char='${ch}' key=${JSON.stringify(key)}`);
     if (key) {
         if (key.name === 'space') {
             paused = !paused;
-            console.log(paused ? "\x1b[35mPaused!\x1b[0m" : "\x1b[35mUnpaused!\x1b[0m");
             if(!paused) {
                 printNextLine();
             }
         } else if (key && key.name === 'q' && delay > 100) {
-            // print quickening pace in green!
-            console.log("\x1b[32mQuickening pace!\x1b[0m");
             delay /= 2;
         } else if (key && key.name === 's' && delay < 8000) {
-            console.log("\x1b[33mSlowing down!\x1b[0m");
             delay *= 2;
         }
     }
 
     if (key && key.ctrl && key.name === 'c') {
-        console.log('CTRL+C pressed. Exiting...');
         process.exit();
     }
 });
@@ -52,7 +46,6 @@ let currentLine = 0;
 let textLines = [];
 
 function printTextResource(text) {
-    console.log("print text resource");
     textLines = text.split('\n');
     printNextLine();
 }
