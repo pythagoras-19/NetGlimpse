@@ -19,3 +19,6 @@ Pressing the spacebar pauses the display; pressing it again resumes the display.
 responsive user experience even while the data is being printed.
 5. **Concurrency Model**: NetGlimpse operates under a non-threaded model, ensuring that it manages its I/O and user 
 interactions within a single thread, following best practices for asynchronous programming.
+
+## Resources
+1. Plain text files used: https://www.gutenberg.org/cache/epub/2701/pg2701.txt
