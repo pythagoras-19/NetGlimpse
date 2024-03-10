@@ -8,7 +8,7 @@ let delay = 1000; // 1 sec.
     try {
         const url = process.argv[2];
         if (!url) {
-            console.error('URL argument is required');
+            console.error('URL argument is required!!');
             process.exit(1);
         }
 
@@ -19,7 +19,7 @@ let delay = 1000; // 1 sec.
     }
 })();
 
-//listen for keypress events
+// listen for keypress events
 process.stdin.on('keypress', (ch, key) => {
     console.log("got keypress", key);
     if (key) {
@@ -33,7 +33,9 @@ process.stdin.on('keypress', (ch, key) => {
     }
 
     if (key && key.ctrl && key.name === 'c') {
-        process.stdin.pause();
+        console.log('CTRL+C pressed. Exiting...');
+        //process.stdin.pause();
+        process.exit();
     }
 });
 
@@ -45,15 +47,29 @@ let textLines = [];
 
 function printTextResource(text) {
     console.log("print text resource");
-    const textLines = text.split('\n');
+    textLines = text.split('\n');
     printNextLine();
 }
 
 function printNextLine() {
-    if (paused || currentLine >= textLines.length) return;
-    console.log(`${currentLine + 1}: ${textLines[currentLine]}`);
-    currentLine++;
-    setTimeout(printNextLine, delay);
+    if (paused || currentLine >= textLines.length) {
+        console.log("returning");
+        console.log("why? : " + paused);
+        console.log("textLines.length:  " + textLines.length);
+        return;
+    }
+    //console.log(`Preparing to print line ${currentLine + 1}`);
+    setTimeout(() => {
+        try {
+            console.log(`${currentLine + 1}: ${textLines[currentLine]}`);
+            //console.log("setTimeout worked!");
+            currentLine++;
+            printNextLine();  // Schedule the next line
+        } catch (error) {
+            console.log("I DIDNT WORK :(");
+            console.error("An error occurred:", error);
+        }
+    }, delay);
 }
 
 function printNonTextResource(data) {
@@ -73,7 +89,7 @@ async function fetchAndProcessUrl(url) {
         if (/text/.test(contentType)) {
             const text = data.toString('utf8');
             console.log("----------------TEXT--------------------\n");
-            console.log(text);
+            // console.log(text);
             printTextResource(text);
             console.log("---------------END TEXT------------------\n");
         } else {
