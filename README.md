@@ -42,7 +42,7 @@ cd NetGlimpse
 ```bash 
 npm install
 ```
-4. Run NetGlimpse locally.
+4. Run NetGlimpse locally with a specified URL.
 ```bash 
 npm start <URL>
 ```
