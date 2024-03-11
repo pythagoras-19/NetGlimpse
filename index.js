@@ -28,7 +28,7 @@ process.stdin.on('keypress', (ch, key) => {
             if(!paused) {
                 printNextLine();
             }
-        } else if (key && key.name === 'q' && delay > 100) {
+        } else if (key && key.name === 'q' && delay > 50) {
             delay /= 2;
         } else if (key && key.name === 's' && delay < 8000) {
             delay *= 2;
