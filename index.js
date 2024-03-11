@@ -66,28 +66,37 @@ function printNextLine() {
     }, delay);
 }
 
-let offset = 0;
+// let offset = 0;
 
-function printNonTextResource(data, offset) {
-    if (paused || offset >= data.length) {
-        return;
+function printNonTextResource(data, offset = 0) {
+    if (offset >= data.length) {
+        return;  // Stop if we've processed all data
     }
-    // prepare the line with 16 bytes
-    let line = Array.from(data.slice(offset, offset + 16));
-    let hexLine = line.map(byte => byte.toString(16).padStart(2, '0')).join(' ');
 
-    console.log(`${offset.toString(16).padStart(8, '0')}  ${hexLine}`);
-
-    offset += 16;
-    if (offset < data.byteLength) {
-        setTimeout(() => printNonTextResource(data, offset));
+    if (paused) {
+        // Wait for unpause
+        setTimeout(() => printNonTextResource(data, offset), delay);
+    } else {
+        // Process data
+        setTimeout(() => {
+            try {
+                let line = Array.from(new Uint8Array(data.slice(offset, offset + 16)));
+                let hexLine = line.map(byte => byte.toString(16).padStart(2, '0')).join(' ');
+                console.log(`${offset.toString(16).padStart(8, '0')}  ${hexLine}`);
+                printNonTextResource(data, offset + 16);
+            } catch (error) {
+                console.error("An error occurred:", error);
+            }
+        }, delay);
     }
 }
 
+
 async function fetchAndProcessUrl(url) {
     console.log("Fetch and processing URL: " + url);
+    let offset;
     try {
-        const response = await axios.get(url, { responseType: 'arraybuffer' });
+        const response = await axios.get(url, {responseType: 'arraybuffer'});
         const data = response.data;
         const contentType = response.headers['content-type'];
 
@@ -95,10 +104,9 @@ async function fetchAndProcessUrl(url) {
             const text = data.toString();
             printTextResource(text);
         } else {
-            printNonTextResource(data, offset);
-            console.log("-------- Finished processing non-text resource --------");
+            printNonTextResource(data, offset = 0);
         }
-    } catch(error) {
+    } catch (error) {
         console.error(`\x1b[31mError: Failed! ${error.message}\x1b[0m`);
     }
 }
