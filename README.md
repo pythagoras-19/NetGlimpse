@@ -28,3 +28,13 @@ NetGlimpse is a command-line utility designed to fetch and display the content f
 
 1. Plain text files used: [https://www.gutenberg.org/cache/epub/2701/pg2701.txt](https://www.gutenberg.org/cache/epub/2701/pg2701.txt)
 2. Non-text file used: [https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png](https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png)
+
+## Developer Instructions
+1. Clone the repository.
+``git clone https://github.com/pythagoras-19/NetGlimpse.git``
+2. Navigate to the project directory.
+``cd NetGlimpse``
+3. Install dependencies.
+``npm install``
+4. Run NetGlimpse locally.
+``npm index.js <URL>``
