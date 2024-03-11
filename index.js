@@ -96,7 +96,7 @@ async function fetchAndProcessUrl(url) {
             printTextResource(text);
         } else {
             printNonTextResource(data, offset);
-            console.log("here");
+            console.log("-------- Finished processing non-text resource --------");
         }
     } catch(error) {
         console.error(`\x1b[31mError: Failed! ${error.message}\x1b[0m`);
