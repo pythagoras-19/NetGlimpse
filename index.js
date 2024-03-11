@@ -66,15 +66,13 @@ function printNextLine() {
     }, delay);
 }
 
-// let offset = 0;
-
 function printNonTextResource(data, offset = 0) {
     if (offset >= data.length) {
-        return;  // Stop if we've processed all data
+        return;
     }
 
     if (paused) {
-        // Wait for unpause
+        // wait for unpause
         setTimeout(() => printNonTextResource(data, offset), delay);
     } else {
         // Process data
@@ -94,7 +92,6 @@ function printNonTextResource(data, offset = 0) {
 
 async function fetchAndProcessUrl(url) {
     console.log("Fetch and processing URL: " + url);
-    let offset;
     try {
         const response = await axios.get(url, {responseType: 'arraybuffer'});
         const data = response.data;
@@ -104,7 +101,7 @@ async function fetchAndProcessUrl(url) {
             const text = data.toString();
             printTextResource(text);
         } else {
-            printNonTextResource(data, offset = 0);
+            printNonTextResource(data);
         }
     } catch (error) {
         console.error(`\x1b[31mError: Failed! ${error.message}\x1b[0m`);
