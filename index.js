@@ -66,9 +66,22 @@ function printNextLine() {
     }, delay);
 }
 
-function printNonTextResource(data) {
-    //TODO: Finish me -- maybe need offset
-    console.log("print non text resource");
+let offset = 0;
+
+function printNonTextResource(data, offset) {
+    if (paused || offset >= data.length) {
+        return;
+    }
+    // prepare the line with 16 bytes
+    let line = Array.from(data.slice(offset, offset + 16));
+    let hexLine = line.map(byte => byte.toString(16).padStart(2, '0')).join(' ');
+
+    console.log(`${offset.toString(16).padStart(8, '0')}  ${hexLine}`);
+
+    offset += 16;
+    if (offset < data.byteLength) {
+        setTimeout(() => printNonTextResource(data, offset));
+    }
 }
 
 async function fetchAndProcessUrl(url) {
@@ -82,8 +95,8 @@ async function fetchAndProcessUrl(url) {
             const text = data.toString();
             printTextResource(text);
         } else {
-            // TODO: FINISH ME
-            printNonTextResource(data);
+            printNonTextResource(data, offset);
+            console.log("here");
         }
     } catch(error) {
         console.error(`\x1b[31mError: Failed! ${error.message}\x1b[0m`);
