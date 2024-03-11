@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="./NetGlimpse_logo.jpeg" width="100"/>
+</p>
 <h1 align="center">NetGlimpse</h1>
 
 ## Overview
