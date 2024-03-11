@@ -10,7 +10,7 @@ let delay = 1000; // 1 sec.
     try {
         const url = process.argv[2];
         if (!url) {
-            console.error('URL argument is required!!');
+            console.error('ERROR: URL argument is required\nUSAGE: npm start <URL>');
             process.exit(1);
         }
 

@@ -44,5 +44,5 @@ npm install
 ```
 4. Run NetGlimpse locally.
 ```bash 
-npm index.js <URL>
+npm start <URL>
 ```
