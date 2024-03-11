@@ -25,3 +25,5 @@ interactions within a single thread, following best practices for asynchronous p
 2. use `s` to slow the pace of the processing.
 ## Resources
 1. Plain text files used: https://www.gutenberg.org/cache/epub/2701/pg2701.txt
+## TODO:
+1. Finish non plain text file display.
