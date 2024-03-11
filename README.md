@@ -31,7 +31,7 @@ NetGlimpse is a command-line utility designed to fetch and display the content f
 
 ## Developer Instructions
 1. Clone the repository.
-``git clone https://github.com/pythagoras-19/NetGlimpse.git``
+```bash git clone https://github.com/pythagoras-19/NetGlimpse.git```
 2. Navigate to the project directory.
 ``cd NetGlimpse``
 3. Install dependencies.
