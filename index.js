@@ -110,3 +110,9 @@ async function fetchAndProcessUrl(url) {
         console.error(`\x1b[31mError: Failed! ${error.message}\x1b[0m`);
     }
 }
+
+module.exports = {
+    fetchAndProcessUrl,
+    printTextResource,
+    printNonTextResource
+};
