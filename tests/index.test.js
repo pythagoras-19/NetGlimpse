@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { fetchAndProcessUrl } = require('../index'); // Adjust the path if necessary
+const { fetchAndProcessUrl } = require('../index');
 
 jest.mock('axios');
 
