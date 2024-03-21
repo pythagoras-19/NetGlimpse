@@ -8,7 +8,7 @@ let delay = 1000; // 1 sec.
 
 (async () => {
     try {
-        const url = process.argv[2];
+        const url = process.argv[2]  || process.env.URL;
         if (!url) {
             console.error('ERROR: URL argument is required\nUSAGE: npm start <URL>');
             process.exit(1);
@@ -40,7 +40,10 @@ process.stdin.on('keypress', (ch, key) => {
     }
 });
 
-process.stdin.setRawMode(true);
+if (process.stdin.isTTY) {
+    process.stdin.setRawMode(true);
+}
+
 process.stdin.resume();
 
 let currentLine = 0;

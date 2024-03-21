@@ -49,3 +49,19 @@ npm install
 ```bash 
 npm start <URL>
 ```
+# Running in Docker
+- Install Docker on your machine at [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/).
+- `username` is your Docker Hub username.
+1. Build the Docker image.
+```bash
+docker build -t <username>/netglimpse .
+```
+2. Run the Docker container.
+```bash
+docker run -it -p 3000:3000 -e URL=<URL> <username>/netglimpse
+```
+- The `-p` flag maps the container's port 3000 to the host's port 3000.
+- The `-e` flag sets the environment variable `URL` to the specified URL.
+- The `it` flag runs the container in interactive mode so **NetGlimpse** can interact with real time user inputs.
+
+
