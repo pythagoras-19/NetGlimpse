@@ -61,7 +61,7 @@ function printNextLine() {
             currentLine++;
             printNextLine();
         } catch (error) {
-            console.error("An error occurred:", error);
+            console.error("An error occurred! :", error);
         }
     }, delay);
 }
