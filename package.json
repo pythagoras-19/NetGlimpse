@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "jest --coverage --verbose"
+    "test": "jest --coverage --verbose",
+    "test:coverage": "jest --coverage && open coverage/lcov-report/index.html"
   },
   "keywords": [],
   "author": "",

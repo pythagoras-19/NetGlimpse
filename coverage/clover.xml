@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711050616199" clover="3.2.0">
-  <project timestamp="1711050616199" name="All files">
+<coverage generated="1711051185123" clover="3.2.0">
+  <project timestamp="1711051185123" name="All files">
     <metrics statements="62" coveredstatements="35" conditionals="38" coveredconditionals="8" methods="10" coveredmethods="5" elements="110" coveredelements="48" complexity="0" loc="62" ncloc="62" packages="1" files="1" classes="1"/>
     <file name="index.js" path="/Users/mattc/WebstormProjects/net-glimpse/index.js">
       <metrics statements="62" coveredstatements="35" conditionals="38" coveredconditionals="8" methods="10" coveredmethods="5"/>
